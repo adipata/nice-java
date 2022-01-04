@@ -3,6 +3,8 @@ package lu.pata.ccl;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class CustomClassLoader extends URLClassLoader {
@@ -29,7 +31,17 @@ public class CustomClassLoader extends URLClassLoader {
 
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
-        System.out.println("Loading class :" + name);
+        System.out.println("Loading class : " + name);
+
+        if(name.startsWith("ccl://")){
+            try {
+                byte[] classData=Files.readAllBytes(Path.of(name.substring(6)+".class"));
+                return defineClass(name.substring(6),classData,0,classData.length);
+            } catch (IOException e) {
+                throw new ClassNotFoundException("Could not load class "+name+" : "+e.getMessage());
+            }
+        }
+
         return super.loadClass(name);
     }
 
