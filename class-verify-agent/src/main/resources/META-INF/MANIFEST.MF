@@ -1,0 +1,4 @@
+Agent-Class: lu.pata.cva.Agent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Premain-Class: lu.pata.cva.Agent

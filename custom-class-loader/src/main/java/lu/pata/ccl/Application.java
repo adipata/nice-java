@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 public class Application {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         // -Djava.system.class.loader=lu.pata.test.CustomClassLoader
+        // -javaagent:class-verify-agent\target\class-verify-agent-1.0-SNAPSHOT.jar
 
         ClassLoader cl=ClassLoader.getSystemClassLoader();
         System.out.println("System class loader: "+cl);
